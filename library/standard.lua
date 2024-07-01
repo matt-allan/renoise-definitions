@@ -84,33 +84,7 @@ function rprint(value) end
 ---mamal:show()
 ---```
 ---@param name string
-function class(name)
-  -- globally register the new class as table with the given name
-  local class_table = {}
-  rawset(_G, name, class_table)
-  -- override class table's call operator to use the class name as constructor too
-  setmetatable(class_table, {
-    __call = function(self, ...)
-      -- create a new instance of the class
-      local new_object = {}
-      setmetatable(new_object, {
-        __index = class_table,
-      })
-      -- call new class' __init function, when its present
-      if rawget(class_table, "__init") then
-        class_table.__init(new_object, ...)
-      end
-      return new_object
-    end
-  })
-  -- return a closure which optionally sets a base class
-  ---@param base table|unknown
-  return function(base)
-    for k, v in pairs(base) do
-      class_table[k] = v
-    end
-  end
-end
+function class(name) end
 
 ---### changed
 
@@ -164,9 +138,7 @@ function debug.stop() end
 ---t = table.create(); t:insert("a"); rprint(t) -> [1] = a;
 ---t = table.create{1,2,3}; print(t:concat("|")); -> "1|2|3";
 ---```
-function table.create(t)
-  return setmetatable(t or {}, { __index = _G.table })
-end
+function table.create(t) end
 
 ---Returns true when the table is empty, else false and will also work
 ---for non indexed tables
