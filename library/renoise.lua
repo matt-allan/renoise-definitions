@@ -1,18 +1,9 @@
 ---@meta
 error("Do not try to execute this file. It's just a type definition file.")
----
----Please read the introduction at https://github.com/renoise/xrnx/
----to get an overview about the complete API, and scripting for
----Renoise in general...
----
-
---------------------------------------------------------------------------------
--- ## renoise
 
 ---Holds all renoise related API functions and classes.
+---@type table
 renoise = {}
-
----### constants
 
 ---Currently 6.1. Any changes in the API which are not backwards compatible,
 ---will increase the internal API's major version number (e.g. from 1.4 -> 2.0).
@@ -25,8 +16,6 @@ renoise.API_VERSION = 6.1
 ---Renoise Version "Major.Minor.Revision[AlphaBetaRcVersion][Demo]"
 ---@type string
 renoise.RENOISE_VERSION = "Major.Minor.Revision[AlphaBetaRcVersion][Demo]"
-
----### functions
 
 ---Global access to the Renoise Application.
 ---@return renoise.Application

@@ -1,3 +1,10 @@
+local function eprint(...)
+  for i=1,select("#", ...) do
+    io.stderr:write(select(i, ...))
+    io.stderr:write("\n")
+  end
+end
+
 local function dump(value, depth, key)
   local linePrefix = ""
   local spaces = ""
@@ -16,9 +23,9 @@ local function dump(value, depth, key)
   if type(value) == 'table' then
     local mTable = getmetatable(value)
     if mTable == nil then
-      print(spaces .. linePrefix .. "(table) ")
+      eprint(spaces .. linePrefix .. "(table) ")
     else
-      print(spaces .. "(metatable) ")
+      eprint(spaces .. "(metatable) ")
       value = mTable
     end
     for tableKey, tableValue in pairs(value) do
@@ -29,9 +36,9 @@ local function dump(value, depth, key)
       type(value) == 'userdata' or
       value == nil
   then
-    print(spaces .. tostring(value))
+    eprint(spaces .. tostring(value))
   else
-    print(spaces .. linePrefix .. "(" .. type(value) .. ") " .. tostring(value))
+    eprint(spaces .. linePrefix .. "(" .. type(value) .. ") " .. tostring(value))
   end
 end
 
